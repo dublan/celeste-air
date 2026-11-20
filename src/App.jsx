@@ -386,7 +386,7 @@ const kioscoService = {
       return { ok: false, mensaje: 'No hay un dispositivo seleccionado.', accion: 'Elige un dispositivo activo para continuar.' }
     }
     if (!texto) {
-      return { ok: false, mensaje: 'Escribe o toca un código de boleto.', accion: 'Usa el código de la reserva o uno de los boletos de demostración.' }
+      return { ok: false, mensaje: 'Escribe o toca un código de boleto.', accion: 'Usa el código de la reserva o consulta tus boletos disponibles.' }
     }
     const base = texto.split('-')[0]
     const booking = bookings.find(
@@ -1330,7 +1330,7 @@ export default function App() {
   }
 
   const resetDemo = () => {
-    const ok = window.confirm('¿Restablecer los datos de prueba? Se borrarán reservas, catálogos y sesión guardados en este navegador.')
+    const ok = window.confirm('¿Reiniciar la experiencia Celeste Air? Se borrarán reservas, catálogos y sesión guardados en este navegador.')
     if (!ok) return
     clearPersisted()
     window.location.hash = 'home'
@@ -1880,7 +1880,7 @@ function Kiosco({ catalogs, bookings, dispositivos, dispositivo, now, onSelectDe
               </form>
 
               <section className="mt-12">
-                <h2 className="text-2xl font-semibold">Boletos de demostración</h2>
+                <h2 className="text-2xl font-semibold">Boletos listos para check-in</h2>
                 {demos.length ? (
                   <div className="mt-4 grid gap-3 sm:grid-cols-2">
                     {demos.map((b) => (
@@ -1900,7 +1900,7 @@ function Kiosco({ catalogs, bookings, dispositivos, dispositivo, now, onSelectDe
                   </div>
                 ) : (
                   <p className="mt-4 border border-white/25 p-5 text-lg">
-                    No hay boletos de demostración para este aeropuerto. Puedes escribir un código de reserva.
+                    No hay boletos listos para check-in en este aeropuerto. Puedes escribir un código de reserva.
                   </p>
                 )}
               </section>
@@ -2556,7 +2556,7 @@ function Checkout({ flight, seats, aviones, catalogs = {}, perfil, hold, error, 
               </label>
             </div>
 
-            <p className="mt-4 text-xs text-slate">Pasarela simulada: no se realiza ningún cobro real.</p>
+            <p className="mt-4 text-xs text-slate">Pago seguro Celeste Air · Tu próximo destino te espera.</p>
           </div>
 
           <p role="alert" className="mt-3 min-h-5 text-sm font-semibold text-airmail">
@@ -3340,7 +3340,7 @@ function BaggageSection({ booking, pax, seat, aviones, bags, onChange, onPay }) 
           <button type="button" onClick={pay} className={`${BTN_PRI} px-4 py-2.5 text-[13px]`}>
             Pagar {COP(totals.costo)}
           </button>
-          <p className="mt-2 text-xs text-slate">Pasarela simulada: no se realiza ningún cobro real.</p>
+          <p className="mt-2 text-xs text-slate">Pago seguro Celeste Air · Tu próximo destino te espera.</p>
         </div>
       )}
 
@@ -3520,7 +3520,7 @@ function PaymentReceipt({ reserva, pago, reembolso, fecha, titulo }) {
         </div>
       )}
 
-      <p className="mt-6 border-t border-rule pt-3 text-[11px] text-slate">Comprobante simulado generado por Celeste Air.</p>
+      <p className="mt-6 border-t border-rule pt-3 text-[11px] text-slate">Celeste Air · Guarda este comprobante para tu viaje.</p>
     </div>
   )
 }
@@ -4938,7 +4938,7 @@ function Footer({ onReset, simClock, now, onSimChange, onSimClear }) {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <div className="font-display text-xl">Celeste Air</div>
-            <p className="mt-1 max-w-[55ch] text-sm text-slate">Proyecto académico de ingeniería de software, con datos de demostración.</p>
+            <p className="mt-1 max-w-[55ch] text-sm text-slate">Vuela más lejos, llega más cerca. Con Celeste Air, cada milla cuenta.</p>
           </div>
           <div className="text-right">
             <p className="text-xs text-slate">Barranquilla, Colombia</p>
@@ -4947,15 +4947,15 @@ function Footer({ onReset, simClock, now, onSimChange, onSimClear }) {
               onClick={onReset}
               className="mt-2 text-xs text-slate underline decoration-rule underline-offset-2 transition-colors hover:text-ink"
             >
-              Restablecer datos de prueba
+              Reiniciar Celeste Air
             </button>
           </div>
         </div>
 
         <div className="mt-8 flex flex-wrap items-end gap-5 border-t border-rule pt-5">
           <div>
-            <div className="text-[11px] font-medium text-ink">Fecha simulada de hoy</div>
-            <p className="mt-1 max-w-[42ch] text-xs text-slate">Ajusta el reloj de la demo para probar la ventana de check-in.</p>
+            <div className="text-[11px] font-medium text-ink">Fecha operativa de hoy</div>
+            <p className="mt-1 max-w-[42ch] text-xs text-slate">Ajusta la fecha operativa para consultar la ventana de check-in.</p>
           </div>
 
           <label className="block text-[11px] text-slate">
