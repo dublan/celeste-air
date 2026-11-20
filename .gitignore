@@ -3,3 +3,5 @@ dist/
 *.log
 .env
 .env.*
+promt.txt
+HANDOFF.md
