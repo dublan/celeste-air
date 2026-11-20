@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #ffffff;
+  --color-mist: #f3f7fa;
+  --color-ink: #12293d;
+  --color-slate: #5b6f80;
+  --color-rule: #dbe4ea;
+  --color-azure: #1d6e9e;
+  --color-azure-deep: #14516f;
+  --color-celeste: #a9d3e6;
+  --color-celeste-pale: #e6f2f8;
+  --color-airmail: #bf3b2b;
+  --font-display: "Bodoni Moda", "Times New Roman", serif;
+  --font-sans: "Archivo", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    scroll-padding-top: 96px;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-celeste);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-azure);
+    outline-offset: 3px;
+  }
+
+  input,
+  select,
+  button {
+    font: inherit;
+  }
+
+  select {
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--color-slate) 50%),
+      linear-gradient(135deg, var(--color-slate) 50%, transparent 50%);
+    background-position:
+      calc(100% - 14px) calc(50% - 2px),
+      calc(100% - 9px) calc(50% - 2px);
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    padding-right: 28px;
+  }
+}
+
+.airmail {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--color-airmail) 0 8px,
+    #ffffff 8px 13px,
+    var(--color-azure) 13px 21px,
+    #ffffff 21px 26px
+  );
+}
+
+.perf {
+  border-top: 1px dashed var(--color-rule);
+}
+
+.bp,
+.bag-tag {
+  break-inside: avoid;
+}
+
+@media (min-width: 768px) {
+  .perf {
+    border-top: 0;
+    border-left: 1px dashed var(--color-rule);
+    position: relative;
+  }
+
+  .perf::before,
+  .perf::after {
+    content: "";
+    position: absolute;
+    left: -10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 9999px;
+    background: var(--color-paper);
+    border: 1px solid var(--color-rule);
+  }
+
+  .perf::before {
+    top: -10px;
+  }
+
+  .perf::after {
+    bottom: -10px;
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hold-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.65;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-copy {
+    animation: hero-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  .hero-photo {
+    animation: hero-fade 1s 0.08s both;
+  }
+
+  .hold-timer--warning {
+    animation: hold-pulse 1.2s ease-in-out infinite;
+  }
+}
+
+@media print {
+  header,
+  footer,
+  .no-print,
+  .kiosco-screen {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  main {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  .ticket,
+  .bp,
+  .bag-tag,
+  .receipt {
+    break-inside: avoid;
+    box-shadow: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
